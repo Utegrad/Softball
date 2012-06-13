@@ -1,4 +1,18 @@
-<?php 
+<?php
+
+require_once 'mysqlClass.php';
+
+require_once 'priv.php';
+$dbValues = array(
+		'server' => SERVER,
+		'username' => USERNAME,
+		'password' => PASSWORD,
+		'database' => DATABASE
+);
+
+$db = new db($dbValues);
+print_r($db);
+
 if( isset($_GET["register"]) && ($_GET["register"] == "y") )
 {
 	?>
@@ -11,6 +25,8 @@ if( isset($_GET["register"]) && ($_GET["register"] == "y") )
 }
 else
 {
+	$db = new db($dbValues) or die("Can't create database connection object");
+	
 	?>
 		<h3>Please fill out this form to register for with your team</h3>
 

@@ -22,7 +22,7 @@
 	}
 	else
 	{
-		include_once 'home.php';
+		phpinfo();
 	}
 	
 	

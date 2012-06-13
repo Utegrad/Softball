@@ -1,6 +1,5 @@
 <?php 
-include_once ("siteStyleClass.php");
-$style = new siteStyle();
+
 ?>
 
 <iframe src="https://www.google.com/calendar/embed?src=gavid5is77kvuf5kpaamn4duec%40group.calendar.google.com&ctz=America/Los_Angeles" style="border: 0" 
