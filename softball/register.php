@@ -11,15 +11,16 @@ $dbValues = array(
 );
 
 $db = new db($dbValues);
-print_r($db);
 
-if( isset($_GET["register"]) && ($_GET["register"] == "y") )
+
+if( isset($_GET['register']) && ($_GET["register"] == "y") )
 {
 	?>
 		<h3>You filled out:</h3>
 			First Name (firstName): <?php echo $_POST["firstName"]; ?> <br>
 			Last Name (lastName): <?php echo $_POST["lastName"]; ?><br>
 			Email Address (email): <?php echo $_POST["email"]; ?><br>
+			Password (password): <?php echo $_POST["password1"]?><br>
 			Cell Phone (mobilePhone): <?php echo $_POST["mobilePhone"]; ?><br>
 	<?php 
 }
@@ -41,8 +42,18 @@ else
 
 				<tr>
 					<td>Email Address:</td><td><input type="text" name="email" size=24 maxlength=35></td>
+				</tr>
+				<tr>
+					<td>Password:</td><td><input type="password" name="password1" size=24 maxlength="24"></td>
+				</tr>				
+				<tr>
+					<td>Confirm Password:</td><td><input type="password" name="password2" size=24 maxlength="24"></td>
+				</tr>
 				<tr>
 					<td>Cell Phone:</td><td><input type="text" name="mobilePhone" size=24 maxlength=15></td>
+				</tr>
+				<tr>
+					<td>Team ID:</td><td><input type="text" name="teamID" size=24 maxlength=24 value="ID from team manager"></td>
 				</tr>
 				<tr>
 					<td>I am a:</td>
