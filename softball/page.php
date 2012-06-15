@@ -56,6 +56,7 @@ class page {
 	
 	function getContentPage($content = 'home')
 	{
+		echo "\n<!-- opening content DIV --> \n <div id='content'>\n";
 		switch ($content)
 		{
 			case "home":
@@ -77,7 +78,8 @@ class page {
 				require_once 'GCal.php';
 				break;
 		}
-		
+		echo "\n<!-- closing content DIV --> \n </div>\n";
+			
 	}
 	
 	function writeFooter()

@@ -1,3 +1,4 @@
+<!-- opening footer DIV  -->
 <div id="footer">
 	<hr/>
 	&#124;&nbsp; <a href=index.php?pg=home class="footerLink">Home</a> &#124;
@@ -11,5 +12,5 @@
 		echo " &#124;";
 	
 	?>
-	
+<!-- closing footer DIV -->
 </div>

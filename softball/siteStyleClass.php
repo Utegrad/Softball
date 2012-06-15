@@ -7,10 +7,11 @@ class siteStyle extends page
 
 	function __construct()
 	{
-		$this->menuWidth = (($this->containerWidth * 0.18) + ($this->appPadding*2));
+		$this->menuWidth = (($this->containerWidth * $this->menuWidthPercentage) + ($this->appPadding*2));
 		$this->contentWidth = $this->containerWidth - $this->menuWidth -($this->appPadding*4);
 	}
 
+	var $menuWidthPercentage = 0.15;
 	var $appPadding = 10;
 	var	$containerWidth = 765;
  	var $menuWidth;

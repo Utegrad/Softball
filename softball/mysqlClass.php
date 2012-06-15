@@ -1,7 +1,18 @@
 <?php
 
+require_once 'priv.php';
+
+$dbValues = array(
+		'server' => SERVER,
+		'username' => USERNAME,
+		'password' => PASSWORD,
+		'database' => DATABASE
+		);
+
 class db 
 {
+
+	
 	function __construct(array $params)
 	{
 		$this->dbCon = mysql_pconnect($params['server'],$params['username'],$params['password']) or die("couldn't connect to the database");

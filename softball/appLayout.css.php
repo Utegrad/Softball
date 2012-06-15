@@ -5,6 +5,8 @@ include_once ("siteStyleClass.php");
 
 $style = new siteStyle();
 
+$wholeContentWidth = $style->get_contentWidth() + ($style->get_appPadding()*2);
+
 ?>
 @CHARSET "ISO-8859-1";
 img {
@@ -33,10 +35,10 @@ img {
 }
 
 #content {
-	 float: left; 
-	 margin: 0; 
-	 padding: 10px; 
-	 width: <?php echo $style->get_contentWidth() ?>px
+	float: left; 
+	margin: 0; 
+	padding: 10px; 
+	width: <?php echo $style->get_contentWidth() ?>px
 }
 
 #footer {
