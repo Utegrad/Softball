@@ -57,6 +57,8 @@ class page {
 	function getContentPage($content = 'home')
 	{
 		echo "\n<!-- opening content DIV --> \n <div id='content'>\n";
+		
+		
 		switch ($content)
 		{
 			case "home":

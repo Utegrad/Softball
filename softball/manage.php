@@ -1,5 +1,11 @@
 <?php
 ?>
-<div id='content'>
+
 	<h3>Management Page!</h3>
-</div>
+	<ul>
+		<li>Teams
+		<li>Calendaring
+		<li>Participants
+		<li>Events
+		
+	</ul>

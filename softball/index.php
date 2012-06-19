@@ -1,11 +1,19 @@
 <?php 
 session_start();
 
-
-
+// require files defining classes and essential config data
+require_once 'mysqlClass.php';
 require_once 'page.php';
+//require_once 'priv.php';
+require_once 'siteStyleClass.php';
+
+// create object to use as globals in other files
+$db = new db();
+$dbConnection = $db->pConnect() or die("Couldn't connect to the datbase<br>\n");
+$pageStyle = new siteStyle();
 $page = new page();
 
+// start writing html to the browser
 $page->writeHtmlDocType();
 $page->openHTMLTag();
 $page->writeHeadContent();

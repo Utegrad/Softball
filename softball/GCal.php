@@ -1,7 +1,8 @@
 <?php 
-	require_once 'siteStyleClass.php';
-	$GCalPageStyle = new siteStyle();
-	$width = ($GCalPageStyle->get_contentWidth() + ($GCalPageStyle->get_appPadding()*2));
+	//global $pageStyle;	
+	global $pageStyle;
+	
+	$width = ($pageStyle->get_contentWidth() + ($pageStyle->get_appPadding()*2));
 	//echo ($style->get_contentWidth() + ($style->get_appPadding()*2));
 	 
 ?>

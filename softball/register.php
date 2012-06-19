@@ -1,10 +1,8 @@
 <?php
-
-require_once 'mysqlClass.php';
 require_once 'validateForm.php'; // functions to validate and evaluate form data
 
-$db = new db($dbValues);
-
+// bring in the $db object from index.php
+global $db;
 
 if( isset($_GET['register']) && ($_GET["register"] == "y") )
 {
@@ -57,7 +55,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") )
 }
 else
 {
-	$db = new db($dbValues) or die("Can't create database connection object");
+	// $db = new db($dbValues) or die("Can't create database connection object");
 	
 	require_once 'registerForm.php';
 	
