@@ -21,21 +21,21 @@ class db
 		
 	}
 	
-	function pConnect()
+	function connect()
 	{
 
 		$params = $this->dbValues;
 		//print_r($params);
-		$connection = $this->dbCon = mysql_pconnect($params['server'],$params['username'],$params['password']) or die("couldn't connect to the database");
-		mysql_select_db($this->dbDatabase);
+		$connection = mysqli_connect($params['server'],$params['username'],$params['password'],$params['database']) or die("couldn't connect to the database");
+		
 		if($connection){
 			return $connection;
 		}
 	}
 	
-	function query($qs)
+	function query($connection, $qs)
 	{
-		$result = mysql_query($qs);
+		$result = mysqli_query($connection, $qs);
 		return $result;
 	}
 }

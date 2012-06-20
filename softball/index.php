@@ -9,7 +9,7 @@ require_once 'siteStyleClass.php';
 
 // create object to use as globals in other files
 $db = new db();
-$dbConnection = $db->pConnect() or die("Couldn't connect to the datbase<br>\n");
+$dbConnection = $db->connect() or die("Couldn't connect to the datbase<br>\n");
 $pageStyle = new siteStyle();
 $page = new page();
 

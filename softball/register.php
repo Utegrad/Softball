@@ -3,6 +3,7 @@ require_once 'validateForm.php'; // functions to validate and evaluate form data
 
 // bring in the $db object from index.php
 global $db;
+global $dbConnection;
 
 if( isset($_GET['register']) && ($_GET["register"] == "y") )
 {
@@ -15,9 +16,9 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") )
 	
 	//check if email address is alread in the User table in the database
 	$emailSelect = "select * from User where UserEmailAddress like '".$_POST['email']."'";
-	$selectResult = $db->query($emailSelect);  // would like to work in some soft of form validation for this before submit
+	$selectResult = $db->query($dbConnection, $emailSelect);  // would like to work in some soft of form validation for this before submit
 	
-	if (mysql_num_rows($selectResult) > 0) //email address exists in database already
+	if (mysqli_num_rows($selectResult) > 0) //email address exists in database already
 	{
 		echo "Email address ".$_POST['email']." already used";
 	}
@@ -31,10 +32,10 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") )
 		
 		// echo $insertEmailQuery; // runs down more space for testing
 				
-		$insertResult = $db->query($insertEmailQuery);
+		$insertResult = $db->query($dbConnection, $insertEmailQuery);
 		if ($insertResult)
 		{
-			echo "<br>".mysql_affected_rows()." users inserted.";
+			echo "<br>".mysqli_affected_rows($dbConnection)." users inserted.";
 		}
 		else 
 			echo "<br>insert failed.";
