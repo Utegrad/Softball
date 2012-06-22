@@ -56,30 +56,28 @@ class page {
 	
 	function getContentPage($content = 'home')
 	{
+		/* get the page URL from the database for inclusion in the page */
 		echo "\n<!-- opening content DIV --> \n <div id='content'>\n";
+		global $db;
+		global $dbConnection;
 		
-		
-		switch ($content)
-		{
-			case "home":
-				require_once 'home.php';
-				break;
-			case "register":
-				require_once 'register.php';
-				break;
-			case "roster":
-				require_once 'roster.php';
-				break;
-			case "calendar":
-				require_once 'calendar.php';
-				break;
-			case "manage":
-				require_once 'manage.php';
-				break;
-			case "GCal":
-				require_once 'GCal.php';
-				break;
+		if (!$content){
+			echo "Content not set.";
+			return;
 		}
+				
+		$pageqs = "SELECT PageBaseURL, PageURL from Page where PageName like '$content'";
+		$pageqr = $db->query($dbConnection,$pageqs);
+		
+		if (mysqli_num_rows($pageqr) != 0){
+			$row = mysqli_fetch_assoc($pageqr);
+			include $row['PageURL'];
+		}
+		else{
+			echo "<h4>Ooops!</h4>
+					Couldn't find the page: $content for some reason...";			
+		}
+				
 		echo "\n<!-- closing content DIV --> \n </div>\n";
 			
 	}
