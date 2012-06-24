@@ -1,6 +1,12 @@
 <?php 
+/**
+ * 
+ * @author Matthew Larsen
+ * @created Jun 24, 2012
+ */
 
-class page {
+
+ class page {
 	function __construct() {
 		
 	}
@@ -21,18 +27,16 @@ class page {
 		echo "\n<html>";
 	}
 	
-	function writeHeadContent()
+	/**
+	 * Writes the <head> tag and its contents
+	 * @param array $extraCSS extra CSS sheets to include in the head
+	 */
+	function writeHeadContent(array $extraCSS = null)
 	{
 		echo "\n<head>
 			\n<title>".$this->pageTitle."</title>";
 		
-		// add page specific style sheets
-		if (isset($_GET['pg']) && ($_GET['pg']=='calendar'))
-		{
-			array_push($this->styleSheetFiles, "calendar.css");
-		}
-		
-		$this->writeStyleSheetLinks();
+		$this->writeStyleSheetLinks($extraCSS);
 		
 		echo "\n</head>";
 	}
@@ -103,13 +107,19 @@ class page {
 		echo "\n</html>";
 	}
 	
-	function writeStyleSheetLinks ($additionalStyleSheets = NULL)
+	/**
+	 * Writes the style sheet links into the page <head> tab
+	 * @param array $additionalStyleSheets CSS pages to include
+	 */
+	function writeStyleSheetLinks (array $additionalStyleSheets = NULL)
 	{
-		if (isset($additionalStyleSheets))
+		if (!empty($additionalStyleSheets))
 		{
-			
 			// echo links for each value passed to function
-			// check if array or string
+			foreach ($additionalStyleSheets as $extraCSS){
+				echo "\n<link href='$extraCSS' rel='stylesheet' type='text/css'>\n";
+			}
+			
 		}
 		foreach ($this->styleSheetFiles as $styleSheetFile)
 		{

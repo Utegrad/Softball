@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'libs/utils.php';
+require_once 'lib/utils.php';
 
 if ((isset($_SESSION['auth'])) && ($_SESSION['auth'] == TRUE)){
 	unset($_SESSION['auth']);

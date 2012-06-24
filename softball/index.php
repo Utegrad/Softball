@@ -20,7 +20,20 @@ $page = new page();
 // start writing html to the browser
 $page->writeHtmlDocType();
 $page->openHTMLTag();
-$page->writeHeadContent();
+
+if (isset($_GET['pg']) && ($_GET['pg']=='manage'))
+{
+	$extraCSS = array( 'mgmtStyles.css.php' );
+	$page->writeHeadContent($extraCSS);
+}
+elseif (isset($_GET['pg']) && ($_GET['pg']=='calendar')){
+	$extraCSS = array( 'calendar.css' );
+	$page->writeHeadContent($extraCSS);
+}
+else 
+	$page->writeHeadContent();
+
+
 $page->openBodyTag();
 
 /* open parent div tag with ID for CSS styling */

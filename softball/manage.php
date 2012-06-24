@@ -4,7 +4,7 @@
  * if not indicate they need to login
  * else show page
  */
-require_once 'libs/utils.php';
+require_once 'lib/utils.php';
 if (!isset($_SESSION['auth']) || ($_SESSION['auth'] != TRUE)){
 	/**
 	 * They aren't logged in so instruction to do so
@@ -15,13 +15,13 @@ else{
 ?>
 
 	<h3>Management Page!</h3>
-	<ul>
-		<li>Teams
-		<li>Calendaring
-		<li>Participants
-		<li>Events
-		
-	</ul>
+	<div class="mgt" id="teams">Teams &nbsp;&#124;</div>
+	<div class="mgt" id="people">&#124;&nbsp; Participants &nbsp;&#124;</div>
+	<div class="mgt" id="cal">&#124;&nbsp; Calendars &nbsp;&#124;</div>
+	<div class="mgt" id="events">&#124;&nbsp; Events</div>
+	
+
+
 <?php 
 }
 

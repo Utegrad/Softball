@@ -16,7 +16,7 @@
  */
 
 session_start();
-require_once 'libs/utils.php';
+require_once 'lib/utils.php';
 
 
 /**********   Establish some variables *************/
