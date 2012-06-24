@@ -13,14 +13,58 @@ $heading->writeHeadingImg();
 		 <p style="text-align: right; margin: 0 auto; padding: 0;">
 		 	Organize your team&#39;s schedule and communications
 		 </p>	
-		 <div id="login" style="float: right; margin: 0; padding:10px; height: 40px; background-color: gray; ">
-		 	<table><tr style="vertical-align: bottom;"><td>
-		 		<form action="login.php">
-		 		<a>Login:</a><input type="text" size=15 maxlength="40" value="Email Address" name="emailAddress"> <input type="submit">
-		 		</form>
-	 		</td></tr>
+		 
+		 <!-- Start login DIV -->
+		 <div id="login" style="float: right; margin: 0; padding:0px; height: 100px; background-color: #638bf0; ">
+		 <?php 
+		 	if( (!isset($_SESSION['auth'])) || ($_SESSION['auth'] == false) ) {
+				
+				global $db;
+				global $dbConnection;
+				/**
+				 * check if _GET['err'] is set and not empty
+				 * lookup description of error code from err
+				 * indicate error desc for login form submission
+				 */
+				
+				if ( isset($_GET['err']) && !empty($_GET['err']) ){
+					$errorQS = "select ErrorCode, ErrorType.ErrorTypeName, ErrorDesc 
+		 				from Error, ErrorType 
+		 				where Error.ErrorType_idErrorType = ErrorType.idErrorType 
+		 				and Error.ErrorCode like '".$_GET['err']."'";
+					if ($errorQR = $db->query($dbConnection, $errorQS)){
+						$row = mysqli_fetch_assoc($errorQR);
+						$errorString = "<p id='loginError'>Login failed for the following reason:<br>
+				 			".$row['ErrorDesc']."</p>\n";
+						echo $errorString; 
+					}
+					
+				}
+				
+		 ?>
+		 
+		 	<table>
+		 		<tr>
+		 			<td style="vertical-align: bottom;">
+		 			<!--  This is where to handle login failure messages -->
+		 			<form action="login.php" method="post">
+		 				Login: <input type="text" size=15 maxlength="40" value="Email Address" name="emailAddress" onfocus="if(this.value == 'Email Address') { this.value = ''; }"> 
+		 				Password: <input type="password" size=15 maxlength="40" name="password"> 
+		 				<input type="submit">
+		 			</form>
+		 			<p style="text-align: right; margin=0 auto; padding: 0;"><a href="index.php?pg=register" class="footerLink">Register</a></p> 
+		 			</td>
+	 			</tr>
 		 	</table>
+		 
+		<?php 
+			}
+			else{
+				echo "<p>Logged in as: SOMEONE :: <a href='logout.php'>LOGOUT</a></p>";
+			}
+		?>		 
 		 </div> 
+		 <!-- End login DIV -->
 <?php 
 $heading->closeHeadingDivTag();
 ?>

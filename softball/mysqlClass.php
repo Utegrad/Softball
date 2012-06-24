@@ -28,6 +28,11 @@ class db
 		//print_r($params);
 		$connection = mysqli_connect($params['server'],$params['username'],$params['password'],$params['database']) or die("couldn't connect to the database");
 		
+		if ($connection->connect_errno) {
+			echo "Failed to connect to MySQL: (" . $connection->connect_errno . ") " . $connection->connect_error;
+			return false;
+		}
+		
 		if($connection){
 			return $connection;
 		}

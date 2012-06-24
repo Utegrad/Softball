@@ -1,5 +1,9 @@
 <?php 
 session_start();
+if (!isset($_SESSION['auth'])){
+	$_SESSION['auth'] = false;
+}
+
 
 // require files defining classes and essential config data
 require_once 'mysqlClass.php';

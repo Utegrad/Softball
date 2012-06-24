@@ -23,8 +23,13 @@ img {
 
 #header {
 	 margin: 0; 
-	 height: 120px;
+	 height: 200px;
 	 position: relative;
+}
+
+#loginError {
+	margin: 0;
+	padding: 0;
 }
 
 #menu {
@@ -37,7 +42,7 @@ img {
 #content {
 	float: left; 
 	margin: 0; 
-	padding: 10px; 
+	padding: 0px; 
 	width: <?php echo $style->get_contentWidth() ?>px
 }
 
