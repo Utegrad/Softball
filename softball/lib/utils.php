@@ -102,4 +102,29 @@ function contains($substring, $string) {
 
 }
 
+/**
+ * Sanitizes an input string to strip slashes, html and tags
+ * @param string $var
+ * @return string
+ */
+function sanitizeString(string $var)
+{
+    $var = stripslashes($var);
+    $var = htmlentities($var);
+    $var = strip_tags($var);
+    return $var;
+}
+
+/**
+ * Sanitizes an input string for mysql by escaping special characters
+ * Then does sanitizeString()
+ * @param string $var
+ * @return string
+ */
+function sanitizeMySQL(string $var)
+{
+    $var = mysqli_real_escape_string($var);
+    $var = sanitizeString($var);
+    return $var;
+}
 ?>
