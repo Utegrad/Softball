@@ -55,6 +55,9 @@ class mgmtContentPage extends page {
 		return;
 	}
 	
+	/**
+	 * Writes the management page headings
+	 */
 	function getHeadings (){
 		//loop through the values in $this->headings and echo
 		//<div class='mgt' id="$this-headings[ROW]['id']"><a href="INDEX.PHP?pg=manage&mgtPg=$this->headings[ROW]['mgtPg']">$this->[ROW]['display']</a></div>
@@ -88,7 +91,7 @@ class mgmtContentPage extends page {
 	 * @param array $heading Associative array for content headings DIV blocks
 	 * 
 	 * @todo This feels sloppy.  Seems like there should be a better way to do this.  
-	 * Mostly it's calling a to do this vs doing it in the getHeadings method
+	 * Mostly it's calling another function to do this vs doing it in the getHeadings method
 	 */
 	private function echoDiv ($lastElement, array $heading){
 		if ($lastElement == FALSE)
