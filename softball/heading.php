@@ -1,4 +1,10 @@
 <?php 
+/**
+ * @author Matthew Larsen
+ * 
+ * 
+ */
+
 require_once ("headingClass.php");
 
 $heading = new heading();
@@ -17,8 +23,9 @@ $heading->writeHeadingImg();
 		 <!-- Start login DIV -->
 		 <div id="login" style="float: right; margin: 0; padding:0px; height: 100px; background-color: #638bf0; ">
 		 <?php 
+		 	// Check if the user is logged in
 		 	if( (!isset($_SESSION['auth'])) || ($_SESSION['auth'] == false) ) {
-				
+				// User isn't logged in
 				global $db;
 				global $dbConnection;
 				/**
@@ -27,6 +34,7 @@ $heading->writeHeadingImg();
 				 * indicate error desc for login form submission
 				 */
 				
+				//  Check for login errors in the query string from previous login attempt
 				if ( isset($_GET['err']) && !empty($_GET['err']) ){
 					$errorQS = "select ErrorCode, ErrorType.ErrorTypeName, ErrorDesc 
 		 				from Error, ErrorType 
@@ -60,7 +68,8 @@ $heading->writeHeadingImg();
 		<?php 
 			}
 			else{
-				echo "<p>Logged in as: SOMEONE :: <a href='logout.php'>LOGOUT</a></p>";
+			// User is logged in
+				echo "<p>Logged in as: ".$_SESSION['confirmedUser']['UserFirstName']." ".$_SESSION['confirmedUser']['UserLastName']." :: <a href='logout.php'>LOGOUT</a></p>";
 			}
 		?>		 
 		 </div> 

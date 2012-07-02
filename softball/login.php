@@ -14,6 +14,9 @@
  * Notes to self:
  * 	_SESSION['HTTP_REFERER'] doesn't include the query string
  * 
+ * Sets _SESSION['confirmedUser'] with values from login query for use 
+ * by other parts of the application
+ * 
  */
 
 session_start();
