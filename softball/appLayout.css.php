@@ -67,3 +67,22 @@ a.footerLink:hover {
     text-decoration: underline;
     border: 0 none;       
 }
+td.label {
+	text-align: right;
+	padding-right: 10px;
+}
+td.errorInfo {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 0.8em;
+}
+div.registerFormHeading{
+	text-align: center;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+div.registerFormSubHeading {
+	text-align: center;
+	font-style: italic;
+	color: red;
+}

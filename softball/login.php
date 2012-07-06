@@ -143,6 +143,18 @@ else {
 			$_SESSION['confirmedUser'] = $confirmedUser;
 			unset($_SESSION['confirmedUser']['UserPassword']);
 			
+			/**
+			 * From the register form process
+			 * Don't want to use these outside that form 
+			 * or confuse them with $_SESSION['confirmedUser']
+			 */
+			$fields = array ('email','firstName','lastName','mobilePhone','teamID');
+			foreach($fields as $field){
+				if(isset($_SESSION[$field])){
+					unset($_SESSION[$field]);
+				}
+			}
+			
 			headerLocation($referer);
 			exit;
 		}

@@ -11,9 +11,9 @@ class siteStyle extends page
 		$this->contentWidth = $this->containerWidth - $this->menuWidth -($this->appPadding*4);
 	}
 
-	var $menuWidthPercentage = 0.15;
+	var $menuWidthPercentage = 0.12;
 	var $appPadding = 10;
-	var	$containerWidth = 765;
+	var	$containerWidth = 800;
  	var $menuWidth;
 	var $contentWidth;
 	

@@ -103,15 +103,16 @@ function contains($substring, $string) {
 }
 
 /**
- * Sanitizes an input string to strip slashes, html and tags
+ * Sanitizes an input string to strip tags
  * @param string $var
  * @return string
  */
-function sanitizeString(string $var)
+function sanitizeString($var)
 {
-    $var = stripslashes($var);
+	$var = strip_tags($var);
+	// $var = stripslashes($var);
     $var = htmlentities($var);
-    $var = strip_tags($var);
+    $var = trim($var);
     return $var;
 }
 
@@ -121,9 +122,9 @@ function sanitizeString(string $var)
  * @param string $var
  * @return string
  */
-function sanitizeMySQL(string $var)
+function sanitizeMySQL(mysqli $con, $var)
 {
-    $var = mysqli_real_escape_string($var);
+    $var = mysqli_real_escape_string($con, $var);
     $var = sanitizeString($var);
     return $var;
 }

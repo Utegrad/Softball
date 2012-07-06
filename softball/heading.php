@@ -60,7 +60,7 @@ $heading->writeHeadingImg();
 		 				Password: <input type="password" size=15 maxlength="40" name="password"> 
 		 				<input type="submit">
 		 			</form>
-		 			<p style="text-align: right; margin=0 auto; padding: 0;"><a href="index.php?pg=register" class="footerLink">Register</a></p> 
+		 			<p style="text-align: right; margin=0 auto; padding: 0;"><a href="index.php?pg=register&clrForm=1" class="footerLink">Register</a></p> 
 		 			</td>
 	 			</tr>
 		 	</table>
