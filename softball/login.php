@@ -23,6 +23,7 @@ session_start();
 require_once 'lib/utils.php';
 
 
+
 /**********   Establish some variables *************/
 
 $host = $_SERVER['HTTP_HOST'];
@@ -38,8 +39,9 @@ if (isset($_SERVER['QUERY_STRING']))
  * Should include _GET['pg'] if it's defined
  */
 if (isset($_SERVER['HTTP_REFERER'])) { 
-	/* 
-	 * check if HTTP_REFERER isn't from our HTTP_HOST ?
+	/**
+	 * @todo check for referer not being from our application
+	 *
 	 * HTTP_REFERER includes the QUERY_STRING
 	 * ??? as below, need to break out $qs and decide what to include  ???
 	 */
@@ -63,6 +65,21 @@ else {
  * _SESSION['auth'] checking and login
  */
 
+require_once 'mysqlClass.php';
+$db = new db();
+if (!$db){
+	headerLocation($referer,'err=NoDBO');
+	// 		echo "Couldn't create database object.";
+	exit;
+}
+
+$dbConnection = $db->connect();
+if (!$dbConnection){
+	headerLocation($referer,'err=NoDBCon');
+	// 		echo "Database connection problems encountered.";
+	exit;
+}
+
 // check to see if they are already logged in
 if ( isset($_SESSION['auth']) && $_SESSION['auth'] == true){  
 	/**
@@ -83,8 +100,10 @@ else {
 	    */
 
 	//  check for emailAddress being submitted
-	if (isset($_POST['emailAddress']) && sanityCheck($_POST['emailAddress'], 'string', 60 ) )
-		$email = $_POST['emailAddress'];
+	if (isset($_POST['emailAddress']) && sanityCheck($_POST['emailAddress'], 'string', 60 ) ){
+		$email = filter_var($_POST['emailAddress'],FILTER_SANITIZE_EMAIL);
+		$email = mysqli_real_escape_string($dbConnection,$email);
+	}
 	else {
 		headerLocation($referer, "err=EEA");	// need to add login failure indicator - Done
 		exit;
@@ -92,7 +111,7 @@ else {
 	
 	// check for password being submitted
 	if (isset($_POST['password']) && sanityCheck($_POST['password'], 'string', 45) )
-		$password = $_POST['password'];
+		$password = mysqli_real_escape_string($dbConnection,$_POST['password']);
 	else {
 		headerLocation($referer,"err=EP");	// need to add login failure indicator
 		exit;
@@ -107,24 +126,6 @@ else {
 	$loginQS = "SELECT * from User 
 			WHERE UserEmailAddress like '".$email."' 
 			and UserPassword ='".$password."'";
-	
-// 	echo '<p>$loginQS : </p>';
-// 	var_dump($loginQS);
-	
-	require_once 'mysqlClass.php';
-	$db = new db();
-	if (!$db){
-		headerLocation($referer,'err=NoDBO');
-// 		echo "Couldn't create database object.";
-		exit;
-	}
-		
-	$dbConnection = $db->connect();
-	if (!$dbConnection){
-		headerLocation($referer,'err=NoDBCon');
-// 		echo "Database connection problems encountered.";
-		exit;
-	}
 	
 	if ($loginQR = $db->query($dbConnection, $loginQS)){
 		
@@ -164,12 +165,9 @@ else {
 			headerLocation($referer,"err=noMatch");  // add login failure indiciator
 			exit;
 		}
-	}
+	} // end if ($loginQR = $db->query($dbConnection, $loginQS))
 
-	
-	// unset POST['password'] and $password?
-
-}
+} // end else They are not logged in.
 
 /*********************************/
 

@@ -6,7 +6,7 @@ function writeRegisterForm($values,$error = FALSE){
 	if($error === TRUE){
 		$heading .= "<div class='registerFormSubHeading'>There was a problem with how you filled out the form.</div>";
 	}
-	$heading .= "<p style='text-align: left; padding-left: 20px;'><span style='color: red; vertical-align: super;'>&#42;</span> indicates a required field.</p>";
+	$heading .= "<p style='text-align: left; padding-left: 20px; margin: 0;'><span style='color: red; vertical-align: super;'>&#42;</span> indicates a required field.</p>";
 	
 	echo $heading;
 
@@ -46,7 +46,7 @@ function writeRegisterForm($values,$error = FALSE){
 				</tr>
 				<tr>
 					<td class='label'>Team ID:</td>
-					<td><input type="text" name="teamID" size=24 maxlength=24 value="<?php echo echoName('teamID') ?>" onfocus="if(this.value == 'ID from team manager') { this.value = ''; }"></td>
+					<td><input type="text" name="teamID" size=24 maxlength=24 value="<?php echo echoName('teamID') ?>"onfocus="if(this.value == 'ID from team manager') { this.value = ''; }"></td>
 					<td class='errorInfo'><?php echoError('teamID',$values) ?></td>
 				</tr>
 				<tr>

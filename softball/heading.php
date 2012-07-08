@@ -21,7 +21,7 @@ $heading->writeHeadingImg();
 		 </p>	
 		 
 		 <!-- Start login DIV -->
-		 <div id="login" style="float: right; margin: 0; padding:0px; height: 100px; background-color: #638bf0; ">
+		 <div id="login" style="float: right; margin: 0; padding:0px; height: 100px; background-image: url(imgs/loginBG.png); ">
 		 <?php 
 		 	// Check if the user is logged in
 		 	if( (!isset($_SESSION['auth'])) || ($_SESSION['auth'] == false) ) {
@@ -69,7 +69,8 @@ $heading->writeHeadingImg();
 			}
 			else{
 			// User is logged in
-				echo "<p>Logged in as: ".$_SESSION['confirmedUser']['UserFirstName']." ".$_SESSION['confirmedUser']['UserLastName']." :: <a href='logout.php'>LOGOUT</a></p>";
+				echo "<p>Logged in as: ".$_SESSION['confirmedUser']['UserFirstName']." ".$_SESSION['confirmedUser']['UserLastName']." :: <a href='logout.php'>LOGOUT</a></p>
+						<p style='text-align: right; margin=0 padding=0;'>::<a href='index.php?pg=profile'>Profile</a>::</p>";
 			}
 		?>		 
 		 </div> 

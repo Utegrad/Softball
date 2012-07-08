@@ -23,7 +23,7 @@ img {
 
 #header {
 	 margin: 0; 
-	 height: 200px;
+	 height: 180px;
 	 position: relative;
 }
 

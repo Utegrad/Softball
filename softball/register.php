@@ -19,6 +19,10 @@ function echoLoggedIn (){
 global $db;
 global $dbConnection;
 
+require_once 'UserData.php';
+$userData = new UserData();
+
+
 $needsCorrection = FALSE;
 // array describing register form values
 $values = array (
@@ -116,6 +120,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 				$value['received'] = TRUE;
 				$_POST[$value['name']] = trim($_POST[$value['name']]);
 				
+		/*****  email   *****/
 				if($value['name'] == 'email'){
 					//we're checking the email value
 					// DEBUG echo $_POST[$value['name']];
@@ -146,6 +151,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 					$_SESSION[$value['name']] = $_POST[$value['name']];
 					continue;
 				}
+		/*****  firstName  *****/
 				elseif($value['name'] == 'firstName'){
 					// check firstName for a reasonable string
 					$pattern = "/^(?:[A-Za-z'-]*(?:\s+|$)){2,3}$/";
@@ -164,6 +170,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 					$_SESSION[$value['name']] = $_POST[$value['name']];
 					continue;
 				}
+		/*****  lastName  *****/
 				elseif($value['name'] == 'lastName'){
 					// check lastName for a reasonable string
 					$pattern = "/^(?:[A-Za-z'-]*(?:\s+|$)){2,3}$/";
@@ -182,6 +189,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 					$_SESSION[$value['name']] = $_POST[$value['name']];
 					continue;
 				}
+		/****   Mobile Phone   ******/
 				elseif($value['name'] == 'mobilePhone'){
 					//check mobilePhone format
 					$pattern = '/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/';
@@ -203,11 +211,13 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 					$_SESSION[$value['name']] = $_POST[$value['name']];
 					continue;
 				}
+		/*****  TeamID    *******/
 				elseif($value['name'] == 'teamID'){
 					//check teamID
 					// Not doing anything with this yet
 					continue;
 				}
+		/*****  Gender   *******/
 				elseif($value['name'] == 'gender'){
 					// check gender
 					if ($_POST[$value['name']] == 'male' || $_POST[$value['name']] == 'female'){
@@ -220,6 +230,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 					$_SESSION[$value['name']] = $_POST[$value['name']];
 					continue;
 				} 
+		/*****  password1  *****/
 				elseif($value['name'] == 'password1'){
 					// we're checking password1
 					if(is_string($_POST[$value['name']]) && strlen($_POST[$value['name']]) >= 4 && strlen($_POST[$value['name']]) <= 40){
@@ -234,6 +245,7 @@ if( isset($_GET['register']) && ($_GET["register"] == "y") ){
 						continue;
 					}
 				}
+		/*****  password2 *****/
 				elseif($value['name'] == 'password2'){
 					$_POST[$value['name']] = mysqli_real_escape_string($dbConnection,$_POST[$value['name']]);
 					continue;		
