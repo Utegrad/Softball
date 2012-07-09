@@ -81,8 +81,8 @@ function echoName($name){
 
 function echoError($name,$values){
 	
-	foreach($values as $value){
-		if($name == $value['name']){
+	foreach($values as $key => $value){
+		if($name == $key){
 			if(isset($value['needsAttention'])){
 				if($value['needsAttention'] === FALSE){
 					//field doesn't need attention
