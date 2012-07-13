@@ -110,15 +110,6 @@ if(isset($_POST['update']) && $_POST['update'] == 'YES'){
 	// compare $userData->formField[FIELD]['newUserData'] to $userData->formField[FIELD]['userData']
 	// if newUserData != userData then update database values with newUserData
 	
-	// how to handle when nothing needed changing?
-	// how to report back that changes were made?
-	// update items as we need to and mark the formField array that a change was made
-	// start with a flag set to false and set it true if changes were made.
-
-	/**
-	 * @todo update userData values to have new values if changed
-	 */
-	
 	foreach($userData->formField as $key => $value){
 	
 		// DEBUG var_dump($key);
@@ -178,7 +169,6 @@ if(isset($_POST['update']) && $_POST['update'] == 'YES'){
 				// update user data to new values to fill in the form if other fields have errors that need to be reflected
 				$updateQR = $db->query($dbConnection, $updateQ);
 				if($updateQR){
-					
 					$userData->formField[$key]['oldUserData'] = $userData->formField[$key]['userData'];
 					$userData->formField[$key]['userData'] = $userData->formField[$key]['newUserData'];
 					unset($userData->formField[$key]['newUserData']);
@@ -209,7 +199,8 @@ if(isset($_POST['update']) && $_POST['update'] == 'YES'){
 	}
 	else{
 		// None of the values set needsCorrection to TRUE so indicate which values were updated.
-
+		
+		// check to see if updates have been made
 		foreach($userData->formField as $key=> $value){
 			if(isset($userData->formField[$key]['valueUpdate'])){
 				$updated = TRUE;
@@ -219,13 +210,14 @@ if(isset($_POST['update']) && $_POST['update'] == 'YES'){
 		}
 		unset($value);
 		
+		// no values changed
 		if(!isset($updated)){
 			echo "<h3 id='noChanges'>Nothing set to be changed</h3>";
 			writeProfileForm($userData->formField);
 			return;
 		}
 		
-		
+		// Indicate which changes that were made 
 		echo "<p>Values Updated:</p>";
 		foreach($userData->formField as $key => $value){
 			
