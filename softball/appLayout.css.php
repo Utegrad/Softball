@@ -70,11 +70,13 @@ a.footerLink:hover {
 td.label {
 	text-align: right;
 	padding-right: 10px;
+	width: 125px; 
 }
 td.errorInfo {
 	text-align: left;
 	padding-left: 10px;
 	font-size: 0.8em;
+	width: 280px;
 }
 div.registerFormHeading{
 	text-align: center;

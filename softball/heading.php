@@ -58,7 +58,7 @@ $heading->writeHeadingImg();
 		 			<form action="login.php" method="post">
 		 				Login: <input type="text" size=15 maxlength="40" value="Email Address" name="emailAddress" onfocus="if(this.value == 'Email Address') { this.value = ''; }"> 
 		 				Password: <input type="password" size=15 maxlength="40" name="password"> 
-		 				<input type="submit">
+		 				<input type="submit" value="Submit">
 		 			</form>
 		 			<p style="text-align: right; margin=0 auto; padding: 0;"><a href="index.php?pg=register&clrForm=1" class="footerLink">Register</a></p> 
 		 			</td>

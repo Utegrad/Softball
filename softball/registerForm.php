@@ -46,7 +46,7 @@ function writeRegisterForm($values,$error = FALSE){
 				</tr>
 				<tr>
 					<td class='label'>Team ID:</td>
-					<td><input type="text" name="teamID" size=24 maxlength=24 value="<?php echo echoName('teamID') ?>"onfocus="if(this.value == 'ID from team manager') { this.value = ''; }"></td>
+					<td><input type="text" name="teamID" size=24 maxlength=24 value="<?php echo echoName('teamID') ?>" onfocus="if(this.value == 'ID from team manager') { this.value = ''; }"></td>
 					<td class='errorInfo'><?php echoError('teamID',$values) ?></td>
 				</tr>
 				<tr>
@@ -101,5 +101,20 @@ function echoError($name,$values){
 		}
 	}
 }
+
+/**
+ * 
+function echoRow($label,$name,$value){
+	$row =  "<tr>
+					<td class='label'>".$label.":";
+	$row .=	$this->echoRequired();
+	$row .= "	</td>
+	 				<td>
+	 					<input type=\"text\" name=\"".$name."\" size=24 maxlength=40 value=".$this->echoName($name).">
+	 				</td>
+	 				<td class='errorInfo'>".echoError($name,$values)."</td>
+				</tr>";
+}
+ */
 
 ?>

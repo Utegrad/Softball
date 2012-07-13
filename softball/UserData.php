@@ -6,23 +6,27 @@ class UserData{
 	private $dbConnection;
 	var $needsCorrection = FALSE;
 	var $formField = array ('email' => array ('required' => true,
-												'received' => FALSE),
+												'received' => FALSE,
+												'dbField' => 'UserEmailAddress'),
 							'password1' => array('required' => true,
-												'received' => FALSE),
+												'received' => FALSE,
+												'dbField' => 'UserPassword'),
 							'password2' => array('required' => true,
 												'received' => FALSE),
 							'firstName' => array('required' => true,
-												'received' => FALSE),
+												'received' => FALSE,
+												'dbField' => 'UserFirstName'),
 							'lastName' => array('required' => true,
-												'received' => FALSE),
+												'received' => FALSE,
+												'dbField' => 'UserLastName'),
 							'mobilePhone' => array('required' => false,
-												'received' => FALSE),
+												'received' => FALSE,
+												'dbField' => 'UserMobilePhone'),
 							'teamID' => array('required' => false,
 												'received' => FALSE),
 							'gender' => array('required' => false,
 												'received' => FALSE)
-			
-					);
+							);
 	
 	function __construct(){
 		require_once 'mysqlClass.php';
@@ -60,6 +64,7 @@ class UserData{
 				$array[$key] = trim($array[$key]);
 			}
 		}
+		unset($field);
 		return;		
 	}
 	
@@ -71,9 +76,10 @@ class UserData{
 	 * @param string $email Email address to validate and sanitize
 	 * @return string returns the sanitized email address 
 	 */
-	function sanitizeEmail($email){
+	function sanitizeEmail($email,$checkDuplicates = TRUE){
 		//we're checking the email value
 		if ($this->formField['email']['received'] === TRUE){
+			// generally set by $this->fieldsGiven($ARRAY)
 			
 			if(filter_var($email,FILTER_VALIDATE_EMAIL) !== FALSE && strlen($email) <= 60){
 				//and it's passed the VALIDATE_EMAIL filter
@@ -81,14 +87,20 @@ class UserData{
 				$email = mysqli_real_escape_string($this->dbConnection,$email);
 				$this->formField['email']['needsAttention'] = FALSE;
 			
-				// check email has already been used
-				$emailSelect = "select idUser,UserEmailAddress from User where UserEmailAddress like '".$email."'";
-				$selectResult = $this->db->query($this->dbConnection,$emailSelect);
-			
-				if (mysqli_num_rows($selectResult) > 0){ //email address exists in database already
-					$this->needsCorrection = TRUE;
-					$this->formField['email']['needsAttention'] = 'Email address is already used';
+				if ($checkDuplicates === TRUE){
+					// check email has already been used
+					$emailSelect = "select idUser,UserEmailAddress from User where UserEmailAddress like '".$email."'";
+					$selectResult = $this->db->query($this->dbConnection,$emailSelect);
+						
+					if (mysqli_num_rows($selectResult) > 0){ //email address exists in database already
+						$this->needsCorrection = TRUE;
+						$this->formField['email']['needsAttention'] = 'Email address is already used';
+					}
 				}
+				else{
+					$this->formField['email']['needsAttention'] = FALSE;
+				}
+				
 			}
 			else{
 				// found an invalid email address
@@ -128,7 +140,9 @@ class UserData{
 				$this->formField[$field]['needsAttention'] = "Invalid phone number given";
 				$this->needsCorrection = TRUE;
 			}
-			$_SESSION[$sessionVar] = $phoneNumber;
+			if(isset($sessionVar) && !empty($sessionVar)){
+				$_SESSION[$sessionVar] = $phoneNumber;
+			}
 		}
 		return $phoneNumber;
 	}
@@ -161,8 +175,10 @@ class UserData{
 				$this->needsCorrection = TRUE;
 			}
 			$name = filter_var($name,FILTER_SANITIZE_STRING);
-			$_SESSION[$sessionVar] = $name;
-			
+			if(isset($sessionVar) && !empty($sessionVar)){
+				$_SESSION[$sessionVar] = $name;
+			}
+						
 		} // end if ($this->formField[$field]['received'] === TRUE)
 		
 		return $name;
@@ -248,7 +264,7 @@ class UserData{
 	}
 	
 	
-	
+
 } // end of class UserData
 
 ?>
